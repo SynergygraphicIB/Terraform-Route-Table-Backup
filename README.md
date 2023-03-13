@@ -1,5 +1,4 @@
-# -Terraform-Route-Table-Backup
- This project uses Terraform to create a backup of an existing route table in AWS. The existing route table is replicated in a new route table and associated with a specific subnet. This project allows users to have a backup of their route tables in AWS and facilitate recovery in case of a failure or data loss.
+
 # Terraform Route Table Backup
 
 This project uses Terraform to create a backup of an existing route table in AWS. The existing route table is replicated in a new route table and associated with a specific subnet. This project allows users to have a backup of their route tables in AWS and facilitates recovery in case of a failure or data loss.
