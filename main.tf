@@ -1,14 +1,6 @@
 resource "aws_route_table" "existing" {
   vpc_id = var.vpc_id
-
-  validate {
-    check = (var.existing_route_table_id != "")
-    error_message = "The ID of the existing route table must be provided."
-  }
-
   route_table_id = var.existing_route_table_id
-
-  # The ID of the existing route table.
 }
 
 data "aws_route_table" "existing_routes" {
@@ -17,20 +9,11 @@ data "aws_route_table" "existing_routes" {
 
 resource "aws_route_table" "backup" {
   vpc_id = var.vpc_id
-
-  validate {
-    check = (var.subnet_id != "")
-    error_message = "The ID of the subnet associated with the route table must be provided."
-  }
-
-  # The ID of the subnet associated with the route table.
 }
 
 resource "aws_route_table_association" "backup" {
   subnet_id = var.subnet_id
   route_table_id = aws_route_table.backup.id
-
-  # The subnet and route table association.
 }
 
 locals {
