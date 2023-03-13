@@ -22,12 +22,6 @@ variable "subnet_id" {
   description = "The ID of the subnet associated with the route table."
 }
 
-variable "existing_routes" {
-  type        = list(object({
-    destination_cidr_block = string
-    gateway_id           = string
-  }))
-  description = "A list of existing routes in the existing route table."
-}
+
 
 
