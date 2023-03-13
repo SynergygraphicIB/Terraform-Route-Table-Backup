@@ -1,0 +1,11 @@
+# .gitignore
+
+# Terraform files
+*.tfstate
+*.tfstate.backup
+
+# Log files
+*.log
+
+# System files
+.DS_Store
