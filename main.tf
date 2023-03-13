@@ -1,10 +1,16 @@
-resource "aws_route_table" "existing" {
-  vpc_id = var.vpc_id
+data "aws_route_table" "existing_routes" {
   route_table_id = var.existing_route_table_id
 }
 
-data "aws_route_table" "existing_routes" {
-  route_table_id = aws_route_table.existing.id
+locals {
+  routes = flatten([
+    for r in data.aws_route_table.existing_routes.routes : [
+      {
+        destination_cidr_block = r.destination_cidr_block,
+        gateway_id = r.gateway_id,
+      },
+    ]
+  ])
 }
 
 resource "aws_route_table" "backup" {
@@ -14,17 +20,6 @@ resource "aws_route_table" "backup" {
 resource "aws_route_table_association" "backup" {
   subnet_id = var.subnet_id
   route_table_id = aws_route_table.backup.id
-}
-
-locals {
-  routes = flatten([
-    for r in data.aws_route_table.existing_routes.route : [
-      {
-        destination_cidr_block = r.destination_cidr_block,
-        gateway_id = r.gateway_id,
-      },
-    ]
-  ])
 }
 
 resource "aws_route" "backup_routes" {
